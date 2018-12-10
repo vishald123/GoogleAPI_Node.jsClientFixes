@@ -13,7 +13,7 @@ const jwtClient = new google.auth.JWT(
         'https://www.googleapis.com/auth/calendar.events',
         'https://www.googleapis.com/auth/calendar.events.readonly',
         'https://www.googleapis.com/auth/calendar.readonly'
-    ]
+    ],'steve@avsarinfotech.com'
 );
 jwtClient.authorize(function (err, tokens) {
     if (err) {
@@ -26,38 +26,38 @@ jwtClient.authorize(function (err, tokens) {
 });
 
   // Make an authorized request to list Calendar events.
-//   const calendar = google.calendar('v3');
-//     calendar.events.list({
-//         auth: jwtClient,
-//         calendarId: CALENDAR_ID
-//     }, function (err, resp) {
-//         if (err) {
-//             console.log(err)
-//         } else {
-//             console.log(resp.data.items);
-//         }
-//     });
-
-    const calendar = google.calendar('v3');
-    calendar.events.insert({
+  const calendar = google.calendar('v3');
+    calendar.events.list({
         auth: jwtClient,
-        calendarId: CALENDAR_ID,
-        fields : '*',
-        "resource": {
-            "end": {
-              "date": "2018-12-18"
-            },
-            "start": {
-              "date": "2018-12-13"
-            }
-          }
+        calendarId: CALENDAR_ID
     }, function (err, resp) {
         if (err) {
             console.log(err)
         } else {
-            console.log(resp.data);
+            console.log(resp.data.items);
         }
     });
+
+    // const calendar = google.calendar('v3');
+    // calendar.events.insert({
+    //     auth: jwtClient,
+    //     calendarId: CALENDAR_ID,
+    //     fields : '*',
+    //     "resource": {
+    //         "end": {
+    //           "date": "2018-12-13"
+    //         },
+    //         "start": {
+    //           "date": "2018-12-12"
+    //         }
+    //       }
+    // }, function (err, resp) {
+    //     if (err) {
+    //         console.log(err)
+    //     } else {
+    //         console.log(resp.data);
+    //     }
+    // });
    
 
      
